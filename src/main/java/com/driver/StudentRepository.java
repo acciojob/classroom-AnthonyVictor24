@@ -30,14 +30,26 @@ public class StudentRepository {
     public void saveStudentTeacherPair(String student, String teacher){
         if(studentMap.containsKey(student) && teacherMap.containsKey(teacher)){
             // your code goes here
-            List<String> studentList = new ArrayList<>();
+//            List<String> studentList = new ArrayList<>();
+//            if(teacherStudentMapping.containsKey(teacher)){
+//                studentList.addAll(teacherStudentMapping.get(teacher));
+//            }
+//            studentList.add(student);
+//            Teacher teacher1 = teacherMap.get(teacher);
+//            teacher1.setNumberOfStudents(studentList.size());
+//            teacherStudentMapping.put(teacher,studentList);
             if(teacherStudentMapping.containsKey(teacher)){
-                studentList.addAll(teacherStudentMapping.get(teacher));
+                List<String> studentList = teacherStudentMapping.get(teacher);
+                studentList.add(student);
+                teacherStudentMapping.put(teacher,studentList);
+
+            }else{
+                List<String> studentList = new ArrayList<>();
+                studentList.add(student);
+                teacherStudentMapping.put(teacher,studentList);
             }
-            studentList.add(student);
             Teacher teacher1 = teacherMap.get(teacher);
-            teacher1.setNumberOfStudents(studentList.size());
-            teacherStudentMapping.put(teacher,studentList);
+            teacher1.setNumberOfStudents(teacher1.getNumberOfStudents()+1);
         }
     }
 
@@ -78,18 +90,23 @@ public class StudentRepository {
 
     public void deleteTeacher(String teacher){
         // your code goes here
-        List<String> studentNamesList = new ArrayList<>();
-        if(teacherMap.containsKey(teacher)){
-            teacherMap.remove(teacher);
-        }
-        if(teacherStudentMapping.containsKey(teacher)){
-            studentNamesList.addAll(teacherStudentMapping.get(teacher));
-            teacherStudentMapping.remove(teacher);
-        }
+//        List<String> studentNamesList = new ArrayList<>();
+//        if(teacherMap.containsKey(teacher)){
+//            teacherMap.remove(teacher);
+//        }
+//        if(teacherStudentMapping.containsKey(teacher)){
+//            studentNamesList.addAll(teacherStudentMapping.get(teacher));
+//            teacherStudentMapping.remove(teacher);
+//        }
 
-        for(String student_Name : studentNamesList){
-            studentMap.remove(student_Name);
+//        for(String student_Name : studentNamesList){
+//            studentMap.remove(student_Name);
+//        }
+        for(String name : teacherStudentMapping.get(teacher)){
+            studentMap.remove(name);
         }
+        teacherMap.remove(teacher);
+        teacherStudentMapping.remove(teacher);
     }
 
     public void deleteAllTeachers(){
@@ -104,8 +121,13 @@ public class StudentRepository {
 //            teacherStudentMapping.remove(e.getKey());
 //        }
 
-        teacherMap.clear();
-        studentMap.clear();
+        for(String name : teacherMap.keySet()){
+            deleteTeacher(name);
+            teacherMap.remove(name);
+        }
+
+//        teacherMap.clear();
+//        studentMap.clear();
         teacherStudentMapping.clear();
     }
 }
