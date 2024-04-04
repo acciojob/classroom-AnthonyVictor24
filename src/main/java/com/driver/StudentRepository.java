@@ -123,11 +123,11 @@ public class StudentRepository {
 
         for(String name : teacherMap.keySet()){
             deleteTeacher(name);
-            teacherMap.remove(name);
+//            teacherMap.remove(name);
         }
 
 //        teacherMap.clear();
 //        studentMap.clear();
-        teacherStudentMapping.clear();
+//        teacherStudentMapping.clear();
     }
 }
