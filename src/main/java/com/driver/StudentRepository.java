@@ -94,14 +94,18 @@ public class StudentRepository {
 
     public void deleteAllTeachers(){
         // your code goes here
-        for(var e : studentMap.entrySet()){
-            studentMap.remove(e.getKey());
-        }
-        for(var e : teacherMap.entrySet()){
-            teacherMap.remove(e.getKey());
-        }
-        for(var e : teacherStudentMapping.entrySet()){
-            teacherStudentMapping.remove(e.getKey());
-        }
+//        for(var e : studentMap.entrySet()){
+//            studentMap.remove(e.getKey());
+//        }
+//        for(var e : teacherMap.entrySet()){
+//            teacherMap.remove(e.getKey());
+//        }
+//        for(var e : teacherStudentMapping.entrySet()){
+//            teacherStudentMapping.remove(e.getKey());
+//        }
+
+        teacherMap.clear();
+        studentMap.clear();
+        teacherStudentMapping.clear();
     }
 }
