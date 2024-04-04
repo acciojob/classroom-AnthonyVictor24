@@ -18,10 +18,10 @@ public class Teacher {
         this.age = age;
     }
 
-    public Teacher(String name,int age){
-        this.name = name;
-        this.age = age;
-    }
+//    public Teacher(String name,int age){
+//        this.name = name;
+//        this.age = age;
+//    }
 
     public String getName() {
         return name;
